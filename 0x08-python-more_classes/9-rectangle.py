@@ -63,10 +63,24 @@ class Rectangle:
 
     def __repr__(self):
         """Returns a string representation of the Rectangle"""
-        sw, sh = str(self.__width), str(self.__height)
-        return "Rectangle(" + sw + ", " + sh + ")"
+        w, h = str(self.__width), str(self.__height)
+        return "Rectangle(" + w + ", " + h + ")"
         
     def __del__(self):
         """Prints a message when an instance of Rectangle is deleted"""
         print("Bye rectangle...")
         Rectangle.number_of_instances -= 1
+        
+    @staticmethod
+    def bigger_or_equal(rect_1, rect_2):
+        """Compares two Rectangles and returns the bigger one"""
+        if not isinstance(rect_1, Rectangle):
+            raise TypeError("rect_1 must be an instance of Rectangle")
+        if not isinstance(rect_2, Rectangle):
+            raise TypeError("rect_2 must be an instance of Rectangle")
+        return (rect_2 if rect_2.area() > rect_1.area() else rect_1)
+
+    @classmethod
+    def square(cls, size=0):
+        """Returns a new instance where the Rectangle sides equal size"""
+        return cls(size, size)
